@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/jniemann66/react-chessdiagram.svg?branch=master)](https://travis-ci.org/jniemann66/react-chessdiagram)
-
 # rudrata-react-chessdiagram
 A fork of a popular chess diagram React component
 
@@ -9,7 +7,7 @@ Knight's Tour Demo: [http://knightstour.juddn.com](http://knightstour.juddn.com)
 
 NPM: [https://www.npmjs.com/package/react-chessdiagram](https://www.npmjs.com/package/react-chessdiagram)
 
-![screenshot](https://github.com/jniemann66/react-chessdiagram/blob/master/screenshot.PNG)
+![screenshot](https://github.com/OulipianSummer/rudrata-react-chessdiagram/blob/master/screenshot.PNG)
 
 ## Forked For Use In Rudrata, a Web Application
 
