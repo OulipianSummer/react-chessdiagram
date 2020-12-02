@@ -1,9 +1,9 @@
 [![Build Status](https://travis-ci.org/jniemann66/react-chessdiagram.svg?branch=master)](https://travis-ci.org/jniemann66/react-chessdiagram)
 
-# react-chessdiagram
-Chess Diagram React Component
+# rudrata-react-chessdiagram
+A fork of a popular chess diagram React component
 
-LIVE DEMO: [http://chessdiagram.juddn.com](http://chessdiagram.juddn.com) *updated 24-apr-2017*
+LIVE DEMO OF ORIGINAL PACKAGE: [http://chessdiagram.juddn.com](http://chessdiagram.juddn.com) *updated 24-apr-2017*
 
 Knight's Tour Demo: [http://knightstour.juddn.com](http://knightstour.juddn.com)
 
@@ -11,6 +11,11 @@ NPM: [https://www.npmjs.com/package/react-chessdiagram](https://www.npmjs.com/pa
 
 ![screenshot](https://github.com/jniemann66/react-chessdiagram/blob/master/screenshot.PNG)
 
+## Forked For Use In Rudrata, a Web Application
+
+This package has been slightly reworked for use in a web application dedicated to knight's tours.
+
+### Ofiginal README
 A react component that can display chess positions from FEN strings, PGN Strings, or a form of algebraic notation (P@a5 R@h8 etc)
 
 It is almost entirely stateless. 
