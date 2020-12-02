@@ -26,9 +26,16 @@ SOFTWARE.
 
 // chessdiagram.js : defines Chess Diagram Component
 
+///////////////////////////////////////////////////////////////////////////////////////////
+// Modified in 2020 by Andrew Benbow for use in the Perecian web app
+// 1. Removed the game history import and all references
+// 2. Updated componentWillReceive props to be compliant with react 16x
+///////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 import React, { Component } from 'react';
 import BoardContainer from './BoardContainer.js';
-import GameHistory from './GameHistory.js';
 import PropTypes from 'prop-types';
 
 
@@ -54,7 +61,7 @@ class Chessdiagram extends Component {
 	}
 
 	// Lifecycle events
-	componentWillReceiveProps(nextProps) {
+	componentDidUpdate(nextProps) {
 		if (nextProps.fen && nextProps.fen !== this.props.fen) {
 			this.setState({currentMove: 0, moves: [nextProps.fen]});
 		}
@@ -101,19 +108,6 @@ class Chessdiagram extends Component {
 					style={{display: 'inline-block'}}
 					onMovePiece={this._onMovePiece.bind(this)}
 				/>
-				{this.props.gameHistory ?
-					<GameHistory
-						currentMove={this.state.currentMove}
-						getHeader={this.props.getHeader}
-						getMovetext={this.props.getMovetext}
-						getResult={this.props.getResult}
-						getRows={this.props.getRows}
-						moveHead={this._onMovePgnHead.bind(this)}
-						newlineChar={this.props.newlineChar}
-						pgn={this.props.pgn}
-						style={{display: 'inline-block'}}
-					/> : null
-				}
 			</div>
 		);
 	}
@@ -131,8 +125,6 @@ Chessdiagram.propTypes = {
 	files: PropTypes.number,
 	/** if true, rotates the board so that Black pawns are moving up, and White pawns are moving down the board */
 	flip: PropTypes.bool,
-	/** whether to render a GameHistory component */
-	gameHistory: PropTypes.bool,
 	/** Optional custom callbacks for PGN parsing. should take pgn (string).
 	*/
 	getFensFromPgn: PropTypes.func,
@@ -181,37 +173,12 @@ Chessdiagram.propTypes = {
 	]),
 };
 
-const getFensFromPgnDefault = (pgn) => {
-	var Game = require('chess.js'); // eslint-disable-line no-undef
-	if (Game.Chess) { // HACK: make it work in the test suite
-		Game = Game.Chess;
-	}
-	const game = new Game();
-	if (!pgn) {
-		return [game.fen()];
-	}
-	game.load_pgn(pgn);
-	let moves = [game.fen()];
-	while (true) {
-		const result = game.undo();
-		if (result) {
-			moves.push(game.fen());
-		} else {
-			break;
-		}
-	}
-	moves = moves.reverse();
-	return moves;
-};
-
 Chessdiagram.defaultProps = {
 	allowMoves: true,
 	darkSquareColor:  "#005EBB",
 	height: 'auto',
 	files: 8,
 	flip: false,
-	gameHistory: false,
-	getFensFromPgn: getFensFromPgnDefault,
 	lightSquareColor: "#2492FF",
 	newlineChar: '\r?\n',
 	pieceDefinitions: {},

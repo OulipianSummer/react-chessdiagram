@@ -24,13 +24,21 @@ SOFTWARE.
 
 */
 
-import React, { Component } from 'react';
-import './piece.css';
+
+
+
+//////////////////////////////////////////////////////////////////////////
+//  Modified in 2020 by Andrew Benbow for use in the Perecain web app
+//  1. Removed the piece.css file, since we will not use it
+//
+////////////////////////////////////////////////////////////////////////
+
+import React from 'react';
 import PropTypes from 'prop-types';
 
 
 /** Piece: renders an svg chess piece of a given type and position */
-class Piece extends Component {
+class Piece extends React.Component {
 
 	shouldComponentUpdate(nextProps) {
 		return (nextProps.x !== this.props.x || nextProps.y !== this.props.y || nextProps.pieceType !== this.props.pieceType || nextProps.squareSize !== this.props.squareSize);

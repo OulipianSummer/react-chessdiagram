@@ -24,6 +24,15 @@ SOFTWARE.
 
 */
 
+////////////////////////////////////////////////////////////////////////////////////
+// Modified in 2020 by Andrew Benbow for use in the Perecian web app
+// 1. Changed the event listener events to window events to escape an esLint error
+// 2. Updated highlight select color to reflect Perecian's built in styles
+// 3. Updated the componentWillReceiveProps method to be compliant with react 16x
+///////////////////////////////////////////////////////////////////////////////////
+
+
+
 import React, { Component } from 'react';
 import Board from './board.js';
 import Piece from './piece.js';
@@ -56,16 +65,16 @@ class BoardContainer extends Component {
 	componentDidMount() {
 		this._getClientPos();
 		// add DOM events
-		addEventListener('resize', this._onResize); // resize event not provided by React events; use DOM version
-		addEventListener('scroll', this._onScroll);
+		  window.addEventListener('resize', this._onResize); // resize event not provided by React events; use DOM version
+		  window.addEventListener('scroll', this._onScroll); // Changed to window event
 	}
 
 	componentWillUnmount() {
-		removeEventListener('resize', this._onResize);
-		removeEventListener('scroll', this._onScroll);
+		window.removeEventListener('resize', this._onResize); // Changed to window event
+		window.removeEventListener('scroll', this._onScroll); // Changed to window event
 	}
 
-	componentWillReceiveProps (nextProps) {
+	componentDidUpdate (nextProps) {
 		if ( /* changes which have an effect on coordinates */
 			nextProps.squareSize !== this.props.squareSize ||
 			nextProps.ranks !== this.props.ranks ||
@@ -272,14 +281,14 @@ class BoardContainer extends Component {
 	// render function
 
 	render() {
-		// TODO: Allow user-defined highlight colors
 		let pieces = this.props.fen ? this._getPiecesFromFEN() : this._getPieces();
 		const pieceDefinitions = Object.assign(standardPieceDefinitions, this.props.pieceDefinitions);
 		const highlights = {};
 		if (this.state.selectedSquare) {
-			highlights[this.state.selectedSquare] = 'yellow';
+			highlights[this.state.selectedSquare] = '#4582ec'; //Changed
 		}
 		return (
+           
 				<svg
 					ref={(svg) => {this.Client = svg;}}
 					style={{display: 'inline-block'}}
@@ -292,6 +301,7 @@ class BoardContainer extends Component {
 					onMouseUp={this._onMouseUp.bind(this)}
 					width={this.props.width === "auto" ? (1 + this.props.files) * this.props.squareSize : this.props.width}
 				>
+            
 
 					<Board
 						darkSquareColor={this.props.darkSquareColor}

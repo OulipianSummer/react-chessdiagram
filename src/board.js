@@ -25,6 +25,16 @@ SOFTWARE.
 */
 
 
+/*
+ *=================================================================================================
+ * Modified in 2020 by Andrew Benbow for use in Perecian web app
+ * 1. Removed stroke width and color
+ * 2. Removed the font family property in render so that the fonts resort to style defaults
+ * 3. Updated default highlight color
+ *=================================================================================================
+ */
+
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -35,8 +45,8 @@ class Square extends Component {
 			<rect
 				fill={fillColor}
 				height={this.props.squareSize}
-				stroke="black"
-				strokeWidth="1"
+				//Removed stroke="black"
+				//strokeWidth="1"
 				width={this.props.squareSize}
 				x={this.props.x}
 				y={this.props.y}
@@ -69,7 +79,7 @@ SquareHighlight.propTypes = {
 };
 
 SquareHighlight.defaultProps = {
-	highlightColor: 'yellow'
+	highlightColor: '#4582ec;' // Changed
 };
 
 class RankLabels extends Component {
@@ -97,7 +107,7 @@ class RankLabels extends Component {
 		return (
 			<g>
 				{rankLabels.map((rankLabel, i) =>
-					<text x={this.props.squareSize / 2} y={rankLabel.y} key={i} fontFamily="Verdana" fontSize={this.props.squareSize / 3} textAnchor="middle">
+					<text x={this.props.squareSize / 2} y={rankLabel.y} key={i} /* Changed fontFamily="Verdana"*/ fontSize={this.props.squareSize / 3} textAnchor="middle">
 						{rankLabel.label}
 					</text>)}
 			</g>
@@ -118,7 +128,7 @@ class FileLabels extends Component {
 		return (
 			<g>
 				{fileLabels.map((fileLabel, i) =>
-					<text x={fileLabel.x} y={this.props.squareSize / 2 + this.props.ranks * this.props.squareSize} key={i} fontFamily="Verdana" fontSize={this.props.squareSize / 3} textAnchor="middle">
+					<text x={fileLabel.x} y={this.props.squareSize / 2 + this.props.ranks * this.props.squareSize} key={i} /*Changed fontFamily="Verdana"*/ fontSize={this.props.squareSize / 3} textAnchor="middle">
 						{fileLabel.label}
 					</text>)}
 			</g>
